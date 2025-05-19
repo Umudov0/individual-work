@@ -39,13 +39,13 @@ def input_student():
             "grade": float(input("Enter Grade (0-100): "))
         }
         students.append(student)
-        print("Student added successfully.")
+        print("✅ Student added successfully.")
     except ValueError:
-        print(" Invalid grade! Please enter a number.")
+        print("❌ Invalid grade! Please enter a number.")
 
 def view_students():
     if not students:
-        print(" No students in the system.")
+        print("📂 No students in the system.")
     else:
         print("{:<10} {:<20} {:<10}".format("ID", "Name", "Grade"))
         for s in students:
@@ -55,9 +55,9 @@ def search_student():
     sid = input("Enter ID to search: ")
     for s in students:
         if s["id"] == sid:
-            print(" Student Found:", s)
+            print("🔍 Student Found:", s)
             return
-    print(" Student not found.")
+    print("❌ Student not found.")
 
 def update_student():
     sid = input("Enter ID to update: ")
@@ -66,53 +66,53 @@ def update_student():
             s["name"] = input("Enter new name: ")
             try:
                 s["grade"] = float(input("Enter new grade: "))
-                print(" Student updated.")
+                print("✅ Student updated.")
             except ValueError:
-                print(" Invalid grade entered.")
+                print("❌ Invalid grade entered.")
             return
-    print(" Student not found.")
+    print("❌ Student not found.")
 
 def delete_student():
     sid = input("Enter ID to delete: ")
     for i, s in enumerate(students):
         if s["id"] == sid:
             del students[i]
-            print("Student deleted.")
+            print("🗑️ Student deleted.")
             return
-    print("Student not found.")
+    print("❌ Student not found.")
 
 def summary_stats():
     if not students:
-        print("No students to analyze.")
+        print("📊 No students to analyze.")
         return
     total = sum(s["grade"] for s in students)
     avg = total / len(students)
-    print(f"Total students: {len(students)}")
-    print(f"Average grade: {avg:.2f}")
+    print(f"👥 Total students: {len(students)}")
+    print(f"📈 Average grade: {avg:.2f}")
 
 def save_to_file():
     with open("students.json", "w") as f:
         json.dump(students, f)
-    print("Data saved to students.json.")
+    print("💾 Data saved to students.json.")
 
 def load_from_file():
     global students
     try:
         with open("students.json", "r") as f:
             students = json.load(f)
-        print("Data loaded successfully.")
+        print("📂 Data loaded successfully.")
     except FileNotFoundError:
-        print("File not found.")
+        print("❌ File not found.")
     except json.JSONDecodeError:
-        print("File is corrupted.")
+        print("❌ File is corrupted.")
 
 def sort_students():
     key = input("Sort by 'id', 'name', or 'grade': ").lower()
     if key in ["id", "name", "grade"]:
         students.sort(key=lambda x: x[key])
-        print(f"Students sorted by {key}.")
+        print(f"✅ Students sorted by {key}.")
     else:
-        print("Invalid field.")
+        print("❌ Invalid field.")
 
 def recursive_count(index=0):
     if index >= len(students):
@@ -121,7 +121,7 @@ def recursive_count(index=0):
 
 def help_menu():
     print("""
-      Help - How to Use the System:
+    📘 Help - How to Use the System:
     - Choose a menu option by typing the number.
     - Make sure each student ID is unique.
     - Use 'Save' before exiting to keep your data.
@@ -129,12 +129,12 @@ def help_menu():
     """)
 
 def clear_data():
-    confirm = input("⚠ Are you sure to delete all data? (yes/no): ")
+    confirm = input("⚠️ Are you sure to delete all data? (yes/no): ")
     if confirm.lower() == "yes":
         students.clear()
-        print(" All student data cleared.")
+        print("🧹 All student data cleared.")
     else:
-        print("Operation cancelled.")
+        print("❎ Operation cancelled.")
 
 def main():
     welcome_screen()
@@ -151,13 +151,14 @@ def main():
             case "7": save_to_file()
             case "8": load_from_file()
             case "9": sort_students()
-            case "10": print(f" Total students (recursive): {recursive_count()}")
+            case "10": print(f"📋 Total students (recursive): {recursive_count()}")
             case "11": help_menu()
             case "12": clear_data()
             case "0":
-                print("Goodbye!")
+                print("👋 Goodbye!")
                 break
-            case _: print("Invalid option. Try again.")
+            case _: print("❌ Invalid option. Try again.")
 
 if __name__ == "__main__":
     main()
+

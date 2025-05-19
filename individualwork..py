@@ -6,8 +6,7 @@ students = []
 def welcome_screen():
     print("""
     ***************************************
-    *     WELCOME TO STUDENT SYSTEM       *
-    *       Designed by Aqif :)           *
+    *     WELCOME TO STUDENT SYSTEM       *               
     ***************************************
     """)
     time.sleep(2)
